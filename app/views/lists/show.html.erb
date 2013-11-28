@@ -4,7 +4,7 @@
 <h3>Tasks to Complete</h3>
 <ul>
 	<% @list.tasks.incomplete.each do |task| %>
-	<li><%= check_box_tag 'description', 'completed' %> <%= task.description %> </li>
+	<li><%= check_box_tag task.id, task.completed, task.completed %> <%= task.description %> </li>
 
 	<% end %>
 </ul>
@@ -12,7 +12,7 @@
 <h3>Completed Tasks</h3>
 <ul>
 	<% @list.tasks.completed.each do |task| %>
-	<li><%= task.description %></li>
+	<li><%= check_box_tag task.id, task.completed, task.completed %> <%= task.description %></li>
 	<% end %>
 </ul>
 
