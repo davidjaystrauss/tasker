@@ -1,2 +1,25 @@
 <h2><%= @list.name %> </h2>
 <p><%= @list.description %></p>
+
+<h3>Tasks to Complete</h3>
+<ul>
+	<% @list.tasks.incomplete.each do |task| %>
+	<li><%= check_box_tag 'description', 'completed' %> <%= task.description %> </li>
+
+	<% end %>
+</ul>
+
+<h3>Completed Tasks</h3>
+<ul>
+	<% @list.tasks.completed.each do |task| %>
+	<li><%= task.description %></li>
+	<% end %>
+</ul>
+
+<%= form_for [@list, @task] do |form| %>
+
+<p><%= form.text_field :description %> <%= form.submit %> </p>
+
+<% end %>
+
+<%= link_to "Back to all categories", lists_path %>

@@ -1,15 +1,3 @@
 <h1>New Task Category</h1>
 
-<%= form_for @list do |form| %>
-	<label>Name:
-	<p><%= form.text_field :name %><p/>
-	</label>
-	
-	<label>Description:
-	<p><%= form.text_field :description %><p/>
-	</label>
-	
-	<p><%= form.submit %> </p>
-	
-	<% end %>
-	
+<%= render :partial => 'form' %>

@@ -1,6 +1,13 @@
 Tasker::Application.routes.draw do
   
-  resources :lists
+  
+
+  resources :lists do
+    resources :tasks
+  end
+  
+  
+  get 'lists/:list_id/tasks/:id/complete' => 'tasks#complete', as: 'complete_task'
 
   devise_for :users
   root 'lists#index'
