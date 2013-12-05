@@ -12,10 +12,10 @@ class ListsController < ApplicationController
     @list = List.new( params.require(:list).permit( :name, :description ))
     if @list.save
       flash[:notice] = "Category created."
-      redirect_to list_url(@list)
+      redirect_to user_list_url(current_user, @list)
     else
       flash[:error] = "Could not create category."
-      redirect_to new_list_url
+      redirect_to new_user_list_url
     end
   end
   
@@ -32,19 +32,19 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     if @list.update_attributes( params.require(:list).permit( :name, :description ))
       flash[:notice] = "Category updated."
-      redirect_to list_path(@list)
+      redirect_to user_lists_path(current_user, @list)
     else
       flash[:error] = "Could not update category."
-      redirect_to edit_list_path(@list)
+      redirect_to edit_user_list_path(current_user, @list)
     end
   end
   
   def destroy
     @list = List.find(params[:id])
     if @list.destroy
-      redirect_to lists_path
+      redirect_to user_lists_path
     else
-      redirect_to lists_path
+      redirect_to user_lists_path
     end
   end
   

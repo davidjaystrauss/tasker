@@ -1,8 +1,10 @@
 <h1>My Task Categories<h1>
 	
 	<% @lists.each do |list| %>
-		<h2><%= link_to "#{list.name}", list_url(list) %></h2>
-		<p><%= list.description %> - <%= link_to "Edit", edit_list_url(list) %> | <%= link_to "Delete", list_url(list), :method => :delete %> </p>
-	<% end %>
+		<h2><%= link_to "#{list.name}", user_list_url(current_user, list) %></h2>
 	
-		<%= link_to "Add new category", new_list_url %>
+		<p><%= list.description %> - <%= link_to "Edit", edit_user_list_url(current_user, list) %> | <%= link_to "Delete", user_list_url(current_user, list), :method => :delete %> </p>
+		
+		<% end %>
+		<%= link_to "Add new category", new_user_list_path(current_user) %>
+		<%= link_to "Sign Out", destroy_user_session_path %>

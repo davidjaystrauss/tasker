@@ -2,15 +2,20 @@ Tasker::Application.routes.draw do
   
   
 
-  resources :lists do
-    resources :tasks
-  end
+  
   
   
   get 'lists/:list_id/tasks/:id/complete' => 'tasks#complete', as: 'complete_task'
+  # '/tasks/:id' => 'tasks#new', :via => :post
 
   devise_for :users
   root 'lists#index'
+  
+  resources :users do
+    resources :lists do
+      resources :tasks
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,9 @@
+<%= form_for [current_user, @list, @task] do |form| %>
+
+<h2> Edit Task for <%= @list.name %> Category</h2>
+<p> Description: <%= form.text_field :description %> </p>
+<p> Due on: <%= form.date_field (:due) %></p>
+<p> <%= form.date_select(:due) %>
+<p><%= form.submit %> </p>
+
+<% end %>
