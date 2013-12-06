@@ -7,15 +7,30 @@ Tasker::Application.routes.draw do
   
   get 'lists/:list_id/tasks/:id/complete' => 'tasks#complete', as: 'complete_task'
   # '/tasks/:id' => 'tasks#new', :via => :post
-
-  devise_for :users
-  root 'lists#index'
   
-  resources :users do
+  
+  root 'lists#index'
+  devise_for :users 
+  
+  devise_scope :user do
+    get "/login" => "devise/sessions#new"
+  end
+  
+  devise_scope :user do
+    delete "/logout" => "devise/sessions#destroy"
+  end
+  
+  devise_scope :user do
+    get "/signup" => "devise/registrations#new"
+  end
+  
+  resources :users, only: [:index, :show] do 
     resources :lists do
       resources :tasks
     end
   end
+  
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

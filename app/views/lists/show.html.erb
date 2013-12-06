@@ -1,37 +1,32 @@
+<% content_for :head do %>
+
+	<%= javascript_include_tag "lists_show"%>
+
+<% end %>
+
 <h2><%= @list.name %> </h2>
 <p><%= @list.description %></p>
 
 <h3>Tasks to Complete</h3>
-<ul>
-	<% @list.tasks.incomplete.each do |task| %>
-	<li><%= form_for [current_user, @list, task] do |form| %>
-	<%= form.check_box :completed %> <%= task.description %> <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Due on: <%= task.due %> </h5> 
-	<%= form.submit %>
-		<% end %></li>
-		<%= link_to 'Edit' %> | 
-		<%= link_to 'Delete' %> <br><br>
-	<% end %>
-</ul>
+<div id= "taskstocomplete">
+	<%= render "taskstocomplete" %>
+</div>
 
 <h3>Completed Tasks</h3>
-<ul>
-	<% @list.tasks.completed.each do |task| %>
-	<li><%= form_for [current_user, @list, task] do |form| %>
-	<%= form.check_box :completed %> <%= task.description %>
-	<%= form.submit %><br><br>
-		<% end %></li>
-	<% end %>
-</ul>
+<div id= "completedtasks">
+	<%= render "completedtasks" %>
+</div>
 
 <%= form_for [current_user, @list, @task] do |form| %>
 
 <h2> Create New Task for <%= @list.name %> Category</h2>
 <p> Description: <%= form.text_field :description %> </p>
 <p> Due on: <%= form.date_field (:due) %></p>
-<p> <%= form.date_select(:due) %>
+<p> <%= form.datetime_select(:due, ampm: true) %>
 <p><%= form.submit %> </p>
 
 <% end %>
 
 <%= link_to "Back to all categories", user_lists_path %>
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 

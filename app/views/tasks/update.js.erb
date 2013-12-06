@@ -1,0 +1,5 @@
+$("#taskstocomplete").html("<%= escape_javascript(render "lists/taskstocomplete") %>");
+$("#completedtasks").html("<%= escape_javascript(render "lists/completedtasks") %>");
+$(':checkbox').on('click',function() {
+	$(this).closest('form').submit();
+})

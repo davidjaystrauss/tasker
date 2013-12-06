@@ -21,7 +21,12 @@ class TasksController < ApplicationController
   def update
     @task = @list.tasks.find(params[:id])
     if @task.update_attributes(params.require(:task).permit( :description, :due, :completed ))
-      redirect_to user_list_path(current_user, @list)
+      respond_to do |format|
+        format.js
+        format.html {
+          redirect_to user_list_path(current_user, @list)
+        }
+      end
     else
       redirect_to user_list_path(current_user, @list)
   end

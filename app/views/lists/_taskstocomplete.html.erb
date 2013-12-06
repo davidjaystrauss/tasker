@@ -1,0 +1,9 @@
+<ul>
+	<% @list.tasks.incomplete.each do |task| %>
+	<li><%= form_for [current_user, @list, task], remote: true do |form| %>
+	<%= form.check_box :completed %> <%= task.description %> <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Due on: <%= task.due %> </h5> 
+		<% end %></li>
+		<%= link_to 'Edit' %> | 
+		<%= link_to 'Delete' %> <br><br>
+	<% end %>
+</ul>
