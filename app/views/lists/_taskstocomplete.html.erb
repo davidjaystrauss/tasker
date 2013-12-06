@@ -3,7 +3,7 @@
 	<li><%= form_for [current_user, @list, task], remote: true do |form| %>
 	<%= form.check_box :completed %> <%= task.description %> <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Due on: <%= task.due %> </h5> 
 		<% end %></li>
-		<%= link_to 'Edit' %> | 
-		<%= link_to 'Delete' %> <br><br>
+		<%= link_to 'Edit', edit_user_list_task_path(current_user, @list, task) %> 
+		<%#= link_to 'Delete', user_list_path(current_user, @list, @task), method: :delete %> <br><br>
 	<% end %>
 </ul>

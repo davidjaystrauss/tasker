@@ -31,6 +31,19 @@ class TasksController < ApplicationController
       redirect_to user_list_path(current_user, @list)
   end
 end
+
+def edit
+  @task = Task.find(params[:id])
+end
+
+def destroy
+  @task = Task.find(params[:id])
+  if @task.destroy
+    redirect_to user_list_path
+  else
+    redirect_to user_list_path
+  end
+end
   
   def complete
     @task = @list.tasks.find(params[:id])

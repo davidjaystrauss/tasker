@@ -1,7 +1,11 @@
 class ListsController < ApplicationController
   
   def index
-   @lists = List.all
+    if user_signed_in?
+      @lists = current_user.lists
+    else
+      redirect_to new_user_session_path
+    end
   end
   
   def new
@@ -10,6 +14,7 @@ class ListsController < ApplicationController
   
   def create
     @list = List.new( params.require(:list).permit( :name, :description ))
+    @list.user=current_user
     if @list.save
       flash[:notice] = "Category created."
       redirect_to user_list_url(current_user, @list)
