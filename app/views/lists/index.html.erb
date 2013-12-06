@@ -1,10 +1,16 @@
 <h1>My Task Categories<h1>
-	
+<% if user_signed_in? %>	
 	<% @lists.each do |list| %>
 		<h2><%= link_to "#{list.name}", user_list_url(current_user, list) %></h2>
 	
 		<p><%= list.description %> - <%= link_to "Edit", edit_user_list_url(current_user, list) %> | <%= link_to "Delete", user_list_url(current_user, list), :method => :delete %> </p>
 		
 		<% end %>
+		
 		<%= link_to "Add new category", new_user_list_path(current_user) %>
 		<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+		
+	<% else %>
+	
+	<%= link_to "Please Sign In To Tasker", new_user_session_path %>
+		<% end %>
